@@ -1,26 +1,16 @@
 ---
-jvm_download_directory: Downloads
-jvm_software_directory: Software
-jvm_destination: /usr/lib/jvm
-jvm_neutral_jdk_link_destination: jdk-8
+jdk_download_directory: Downloads
+jdk_software_directory: Software
+jdk_destination: /usr/lib/jvm
+jdk_neutral_jdk_link_destination: jdk-8
 
-jvm_oracle_jdk_install: true
-jvm_oracle_jdk_version: jdk1.8.0_111
-jvm_oracle_jdk_path: 8u111-b14/jdk-8u111
-jvm_oracle_jdk_link_destination: oracle-jdk-8
+jdk_oracle_jdk_install: true
+jdk_oracle_jdk_version: jdk1.8.0_111
+jdk_oracle_jdk_path: 8u111-b14/jdk-8u111
+jdk_oracle_jdk_link_destination: oracle-jdk-8
 
-jvm_sdkman_install: true
-
-jvm_intellij_install: true
-jvm_intellij_version: 2016.2.4
-jvm_intellij_build: 162.2032.8
-jvm_intellij_share_jdk: true
-
-jvm_azul_jdk_install: false
-jvm_azul_jdk_build: 8.17.0.3
-jvm_azul_jdk_version: 8.0.102
-jvm_azul_jdk_link_destination: azul-jdk-8
-
-jvm_charles_install: true
-jvm_charles_version: 4.0.1
+jdk_azul_jdk_install: true
+jdk_azul_jdk_build: 8.17.0.3
+jdk_azul_jdk_version: 8.0.102
+jdk_azul_jdk_link_destination: azul-jdk-8
 

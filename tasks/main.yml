@@ -7,17 +7,7 @@
       mode: 0755
       recurse: yes
   with_items:
-  - "{{jvm_destination}}"
-
-- name: Create unprivledged folders
-  become: no
-  file:
-      path: "{{item}}"
-      state: directory
-      mode: 0755
-      recurse: yes
-  with_items:
-  - "{{ansible_user_dir}}/{{jvm_software_directory}}"
+  - "{{jdk_destination}}"
 
 - name: Install Required Packages
   become: yes
@@ -28,216 +18,98 @@
   - "curl"
   - "ca-certificates"
 
+- name: Determine Default JDK
+  become: no
+  set_fact:
+      default_jdk: "{% if jdk_oracle_jdk_install %}{{jdk_oracle_jdk_link_destination}}{% else %}{{jdk_azul_jdk_link_destination}}{% endif %}"
+
 - name: Download Azul JDK Tarball
   become: no
   get_url:
-      url: "http://cdn.azul.com/zulu/bin/zulu{{jvm_azul_jdk_build}}-jdk{{jvm_azul_jdk_version}}-linux_x64.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/azul-jdk-{{jvm_azul_jdk_version}}.tar.gz"
+      url: "http://cdn.azul.com/zulu/bin/zulu{{jdk_azul_jdk_build}}-jdk{{jdk_azul_jdk_version}}-linux_x64.tar.gz"
+      dest: "{{ansible_user_dir}}/{{jdk_download_directory}}/azul-jdk-{{jdk_azul_jdk_version}}.tar.gz"
       mode: 0444
-  when: jvm_azul_jdk_install
+  when: jdk_azul_jdk_install
 
 - name: Uncompress Azul JDK Tarball
   become: yes
   unarchive:
-      src: "{{ansible_user_dir}}/{{jvm_download_directory}}/azul-jdk-{{jvm_azul_jdk_version}}.tar.gz"
-      dest: "{{jvm_destination}}"
+      src: "{{ansible_user_dir}}/{{jdk_download_directory}}/azul-jdk-{{jdk_azul_jdk_version}}.tar.gz"
+      dest: "{{jdk_destination}}"
       copy: no
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-      creates: "{{jvm_destination}}//zulu{{jvm_azul_jdk_build}}-jdk{{jvm_azul_jdk_version}}-linux_x64/LICENSE"
-  when: jvm_azul_jdk_install
+      creates: "{{jdk_destination}}//zulu{{jdk_azul_jdk_build}}-jdk{{jdk_azul_jdk_version}}-linux_x64/LICENSE"
+  when: jdk_azul_jdk_install
 
 - name: Test Azul JDK
   become: no
-  command: "{{jvm_destination}}//zulu{{jvm_azul_jdk_build}}-jdk{{jvm_azul_jdk_version}}-linux_x64/bin/java -version"
-  when: jvm_azul_jdk_install
+  command: "{{jdk_destination}}//zulu{{jdk_azul_jdk_build}}-jdk{{jdk_azul_jdk_version}}-linux_x64/bin/java -version"
+  when: jdk_azul_jdk_install
 
 - name: Create Softlink To Azul JDK
   become: yes
   file:
-      src: "{{jvm_destination}}//zulu{{jvm_azul_jdk_build}}-jdk{{jvm_azul_jdk_version}}-linux_x64"
-      dest: "{{jvm_destination}}/{{jvm_azul_jdk_link_destination}}"
+      src: "{{jdk_destination}}//zulu{{jdk_azul_jdk_build}}-jdk{{jdk_azul_jdk_version}}-linux_x64"
+      dest: "{{jdk_destination}}/{{jdk_azul_jdk_link_destination}}"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       state: link
-  when: jvm_azul_jdk_install
-
-- name: Create Softlink To Neutral JDK
-  become: yes
-  file:
-      src: "{{jvm_destination}}//zulu{{jvm_azul_jdk_build}}-jdk{{jvm_azul_jdk_version}}-linux_x64"
-      dest: "{{jvm_destination}}/{{jvm_neutral_jdk_link_destination}}"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      state: link
-  when: jvm_azul_jdk_install
-
-- name: Set Global Environment To Use Azul JDK
-  become: yes
-  template:
-      src: "templates/azul-jdk-environment.sh.j2"
-      dest: "/etc/profile.d/azul-jdk-environment.sh"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-  when: jvm_azul_jdk_install
+  when: jdk_azul_jdk_install
 
 - name: Download Oracle JDK Tarball
   become: no
   get_url:
-      url: "http://download.oracle.com/otn-pub/java/jdk/{{ jvm_oracle_jdk_path }}-linux-x64.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/oracle-jdk-{{ jvm_oracle_jdk_version }}.tar.gz"
+      url: "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_oracle_jdk_path }}-linux-x64.tar.gz"
+      dest: "{{ansible_user_dir}}/{{jdk_download_directory}}/oracle-jdk-{{ jdk_oracle_jdk_version }}.tar.gz"
       headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
       mode: 0444
-  when: jvm_oracle_jdk_install
+  when: jdk_oracle_jdk_install
 
 - name: Uncompress Oracle JDK Tarball
   become: yes
   unarchive:
-      src: "{{ansible_user_dir}}/{{jvm_download_directory}}/oracle-jdk-{{jvm_oracle_jdk_version}}.tar.gz"
-      dest: "{{ jvm_destination }}"
+      src: "{{ansible_user_dir}}/{{jdk_download_directory}}/oracle-jdk-{{jdk_oracle_jdk_version}}.tar.gz"
+      dest: "{{ jdk_destination }}"
       copy: no
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-      creates: "{{ jvm_destination }}/{{jvm_oracle_jdk_version}}/COPYRIGHT"
-  when: jvm_oracle_jdk_install
+      creates: "{{ jdk_destination }}/{{jdk_oracle_jdk_version}}/COPYRIGHT"
+  when: jdk_oracle_jdk_install
 
 - name: Test Oracle JDK
   become: no
-  command: "{{jvm_destination}}/{{jvm_oracle_jdk_version}}/bin/java -version"
-  when: jvm_oracle_jdk_install
+  command: "{{jdk_destination}}/{{jdk_oracle_jdk_version}}/bin/java -version"
+  when: jdk_oracle_jdk_install
 
 - name: Create Softlink To Oracle JDK
   become: yes
   file:
-      src: "{{jvm_destination}}/{{jvm_oracle_jdk_version}}"
-      dest: "{{jvm_destination}}/{{jvm_oracle_jdk_link_destination}}"
+      src: "{{jdk_destination}}/{{jdk_oracle_jdk_version}}"
+      dest: "{{jdk_destination}}/{{jdk_oracle_jdk_link_destination}}"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       state: link
-  when: jvm_oracle_jdk_install
+  when: jdk_oracle_jdk_install
 
 - name: Create Softlink To Neutral JDK
   become: yes
   file:
-      src: "{{jvm_destination}}/{{jvm_oracle_jdk_version}}"
-      dest: "{{jvm_destination}}/{{jvm_neutral_jdk_link_destination}}"
+      src: "{{jdk_destination}}/{{default_jdk}}"
+      dest: "{{jdk_destination}}/{{jdk_neutral_jdk_link_destination}}"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       state: link
-  when: jvm_oracle_jdk_install
 
-- name: Set Global Environment To Use Oracle JDK
+- name: Set Global Environment To Use Default JDK
   become: yes
   template: 
-      src: "templates/oracle-jdk-environment.sh.j2"
-      dest: "/etc/profile.d/oracle-jdk-environment.sh"
+      src: "templates/default-jdk-environment.sh.j2"
+      dest: "/etc/profile.d/default-jdk-environment.sh"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-  when: jvm_oracle_jdk_install
-
-- name: Download SDKMAN!
-  become: no
-  get_url:
-      url: "https://get.sdkman.io"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/sdkman-install.sh"
-      mode: 0554
-  when: jvm_sdkman_install
-
-- name: Run SDKMAN! Installer
-  become: no
-  shell: "{{ansible_user_dir}}/{{jvm_download_directory}}/sdkman-install.sh"
-  when: jvm_sdkman_install
-
-- name: Download IntelliJ IDEA Tarball
-  become: no
-  get_url:
-      url: "https://download.jetbrains.com/idea/ideaIU-{{ jvm_intellij_version }}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/idea-{{ jvm_intellij_version }}.tar.gz"
-      mode: 0444
-  when: jvm_intellij_install
-
-- name: Uncompress IntelliJ IDEA Tarball
-  become: no
-  unarchive:
-      src: "{{ansible_user_dir}}/{{jvm_download_directory}}/idea-{{ jvm_intellij_version }}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_software_directory}}"
-      copy: no
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-      creates: "{{ansible_user_dir}}/{{jvm_software_directory}}/idea-IU-{{jvm_intellij_build}}/build.txt"
-  when: jvm_intellij_install
-
-- name: Create Softlink To IntelliJ IDEA
-  become: no
-  file:
-      src: "{{ansible_user_dir}}/{{jvm_software_directory}}/idea-IU-{{jvm_intellij_build}}"
-      dest: "{{ansible_user_dir}}/{{jvm_software_directory}}/idea"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      state: link
-  when: jvm_intellij_install
-
-- name: Create Desktop Icon For IntelliJ IDEA
-  become: no
-  template:
-      src: "templates/idea.desktop.j2"
-      dest: "{{ansible_user_dir}}/Desktop/idea.desktop"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-  when: jvm_intellij_install
-
-- name: Set Global Environment To Have IntelliJ Use Shared JDK
-  become: yes
-  template:
-      src: "templates/intellij-environment.sh.j2"
-      dest: "/etc/profile.d/intellij-environment.sh"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-  when: jvm_intellij_share_jdk
-
-- name: Remove IntelliJ's Embedded JDK
-  become: no
-  file:
-      path: "{{ansible_user_dir}}/{{jvm_software_directory}}/idea/jre"
-      state: absent
-  when: jvm_intellij_share_jdk
-
-- name: Download Charles Tarball
-  become: no
-  get_url:
-      url: "https://www.charlesproxy.com/assets/release/{{jvm_charles_version}}/charles-proxy-{{jvm_charles_version}}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/charles-proxy-{{jvm_charles_version}}.tar.gz"
-      mode: 0444
-  when: jvm_charles_install
-
-- name: Uncompress Charles Tarball
-  become: no
-  unarchive:
-      src: "{{ansible_user_dir}}/{{jvm_download_directory}}/charles-proxy-{{jvm_charles_version}}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_software_directory}}"
-      copy: no
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-      creates: "{{ansible_user_dir}}/{{jvm_software_directory}}/charles/doc/EULA.rtf"
-  when: jvm_charles_install
-
-- name: Create Desktop Icon For Charles
-  become: no
-  template:
-      src: "templates/charles.desktop.j2"
-      dest: "{{ansible_user_dir}}/Desktop/charles.desktop"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-  when: jvm_charles_install
-
 
 

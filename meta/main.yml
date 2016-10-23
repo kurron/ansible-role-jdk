@@ -31,7 +31,7 @@ galaxy_info:
     - xenial
 
   galaxy_tags:
-      - development
+      - jdk
       - jvm
       - java
 
