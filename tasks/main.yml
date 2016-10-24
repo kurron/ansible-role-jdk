@@ -89,7 +89,7 @@
   become: yes
   file:
       src: "{{jdk_destination}}/{{default_jdk}}"
-      dest: "{{jdk_destination}}/{{jdk_neutral_jdk_link_destination}}"
+      dest: "{{jdk_global_jdk_directory}}"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       state: link

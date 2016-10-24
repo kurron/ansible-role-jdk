@@ -3,6 +3,7 @@ jdk_download_directory: Downloads
 jdk_software_directory: Software
 jdk_destination: /usr/lib/jvm
 jdk_neutral_jdk_link_destination: jdk-8
+jdk_global_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_jdk_link_destination}}"
 
 jdk_oracle_jdk_install: true
 jdk_oracle_jdk_version: jdk1.8.0_111
