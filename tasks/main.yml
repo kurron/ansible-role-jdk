@@ -9,15 +9,6 @@
   with_items:
   - "{{jdk_destination}}"
 
-- name: Install Required Packages
-  become: yes
-  package:
-      name: "{{item}}"
-      state: present
-  with_items:
-  - "curl"
-  - "ca-certificates"
-
 - name: Determine Default JDK
   become: no
   set_fact:
@@ -111,5 +102,4 @@
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-
 
