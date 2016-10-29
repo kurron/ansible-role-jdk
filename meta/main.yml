@@ -1,6 +1,6 @@
 galaxy_info:
   author: Ronald D. Kurr
-  description: Long time slinger of code.
+  description: Oracle and Azul JDKs.
   company: jvmguy.com
 
   license: Apache 2
@@ -34,6 +34,9 @@ galaxy_info:
       - jdk
       - jvm
       - java
+      - zulu
+      - oracle
+      - azul
 
 dependencies:
     - { role: kurron.base }
