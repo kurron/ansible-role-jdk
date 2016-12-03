@@ -1,5 +1,5 @@
 ---
-- name: Create privledged folders 
+- name: Create privledged folders
   become: yes
   file:
       path: "{{item}}"
@@ -94,12 +94,17 @@
       group: "{{ansible_user_gid}}"
       state: link
 
-- name: Set Global Environment To Use Default JDK
+- name: Set Interactive Environments To Use Default JDK
   become: yes
-  template: 
+  template:
       src: "templates/default-jdk-environment.sh.j2"
       dest: "/etc/profile.d/default-jdk-environment.sh"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
 
+- name: Set Non-Interactive Environments To Use Default JDK
+  become: yes
+  lineinfile:
+      dest: /etc/environment
+      line: 'JAVA_HOME={{ jdk_global_jdk_directory }}'
