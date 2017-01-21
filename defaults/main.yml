@@ -6,8 +6,8 @@ jdk_neutral_jdk_link_destination: jdk-8
 jdk_global_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_jdk_link_destination}}"
 
 jdk_oracle_jdk_install: true
-jdk_oracle_jdk_version: jdk1.8.0_111
-jdk_oracle_jdk_path: 8u111-b14/jdk-8u111
+jdk_oracle_jdk_version: jdk1.8.0_121
+jdk_oracle_jdk_path: 8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121
 jdk_oracle_jdk_link_destination: oracle-jdk-8
 
 jdk_azul_jdk_install: true

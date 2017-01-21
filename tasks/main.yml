@@ -12,7 +12,8 @@
 - name: Determine Default JDK
   become: no
   set_fact:
-      default_jdk: "{% if jdk_oracle_jdk_install %}{{jdk_oracle_jdk_link_destination}}{% else %}{{jdk_azul_jdk_link_destination}}{% endif %}"
+#     default_jdk: "{% if jdk_oracle_jdk_install %}{{jdk_oracle_jdk_link_destination}}{% else %}{{jdk_azul_jdk_link_destination}}{% endif %}"
+      default_jdk: "{{jdk_azul_jdk_link_destination}}"
 
 - name: Download Azul JDK Tarball
   become: no
