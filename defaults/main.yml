@@ -11,7 +11,7 @@ jdk_oracle_jdk_path: 8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121
 jdk_oracle_jdk_link_destination: oracle-jdk-8
 
 jdk_azul_jdk_install: true
-jdk_azul_jdk_build: 8.21.0.1
-jdk_azul_jdk_version: 8.0.131
-jdk_azul_jdk_link_destination: azul-jdk-8
+jdk_azul_jdk_build: 9.0.0.15
+jdk_azul_jdk_version: 9.0.0
+jdk_azul_jdk_link_destination: azul-jdk-9
 
