@@ -2,16 +2,17 @@
 jdk_download_directory: Downloads
 jdk_software_directory: Software
 jdk_destination: /usr/lib/jvm
-jdk_neutral_jdk_link_destination: jdk-8
+jdk_neutral_jdk_link_destination: jdk-9
+jdk_neutral_legacy_jdk_link_destination: jdk-8
 jdk_global_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_jdk_link_destination}}"
-
-jdk_oracle_jdk_install: false
-jdk_oracle_jdk_version: jdk1.8.0_121
-jdk_oracle_jdk_path: 8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121
-jdk_oracle_jdk_link_destination: oracle-jdk-8
+jdk_global_legacy_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_legacy_jdk_link_destination}}"
 
 jdk_azul_jdk_install: true
 jdk_azul_jdk_build: 9.0.0.15
 jdk_azul_jdk_version: 9.0.0
 jdk_azul_jdk_link_destination: azul-jdk-9
 
+jdk_azul_legacy_jdk_install: true
+jdk_azul_legacy_jdk_build: 8.23.0.3
+jdk_azul_legacy_jdk_version: 8.0.144
+jdk_azul_legacy_jdk_link_destination: azul-jdk-8
