@@ -8,11 +8,11 @@ jdk_global_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_jdk_link_destinatio
 jdk_global_legacy_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_legacy_jdk_link_destination}}"
 
 jdk_azul_jdk_install: true
-jdk_azul_jdk_build: 9.0.0.15
-jdk_azul_jdk_version: 9.0.0
+jdk_azul_jdk_build: 9.0.1.3
+jdk_azul_jdk_version: 9.0.1
 jdk_azul_jdk_link_destination: azul-jdk-9
 
 jdk_azul_legacy_jdk_install: true
-jdk_azul_legacy_jdk_build: 8.23.0.3
-jdk_azul_legacy_jdk_version: 8.0.144
+jdk_azul_legacy_jdk_build: 8.25.0.1
+jdk_azul_legacy_jdk_version: 8.0.152
 jdk_azul_legacy_jdk_link_destination: azul-jdk-8
