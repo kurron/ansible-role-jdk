@@ -12,8 +12,6 @@ jdk_azul_jdk_build: 9.0.4.1
 jdk_azul_jdk_version: 9.0.4
 jdk_azul_jdk_link_destination: azul-jdk-9
 
-https://cdn.azul.com/zulu/bin/zulu8.28.0.1-jdk8.0.163-linux_x64.tar.gz
-
 jdk_azul_legacy_jdk_install: true
 jdk_azul_legacy_jdk_build: 8.28.0.1
 jdk_azul_legacy_jdk_version: 8.0.163
