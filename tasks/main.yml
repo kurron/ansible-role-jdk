@@ -6,7 +6,7 @@
       state: directory
       mode: 0755
       recurse: yes
-  with_items:
+  loop:
   - "{{jdk_destination}}"
 
 - name: Determine Default JDK
