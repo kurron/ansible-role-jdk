@@ -3,6 +3,10 @@ jdk_download_directory: Downloads
 jdk_software_directory: Software
 jdk_destination: /usr/lib/jvm
 
+jdk_azul_jdk_10_install: true
+jdk_azul_jdk_10_build: 10.1+11 
+jdk_azul_jdk_10_link_destination: azul-jdk-10
+
 jdk_azul_jdk_9_install: true
 jdk_azul_jdk_9_build: 9.0.4.1
 jdk_azul_jdk_9_version: 9.0.4
