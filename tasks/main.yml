@@ -49,15 +49,6 @@
       state: link
   when: jdk_azul_jdk_9_install
 
-- name: Create Softlink To Neutral JDK
-  become: yes
-  file:
-      src: "{{jdk_destination}}/{{default_jdk}}"
-      dest: "{{jdk_global_jdk_directory}}"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      state: link
-
 - name: Set Interactive Environments To Use Default JDK
   become: yes
   template:
@@ -71,7 +62,7 @@
   become: yes
   lineinfile:
       dest: /etc/environment
-      line: 'JAVA_HOME={{ jdk_global_jdk_directory }}'
+      line: 'JAVA_HOME={{jdk_destination}}/{{jdk_azul_jdk_8_link_destination}}'
 
 - name: Download Azul JDK 8 Tarball
   become: no
@@ -108,11 +99,3 @@
       state: link
   when: jdk_azul_jdk_8_install
 
-- name: Create Softlink To Neutral JDK 8
-  become: yes
-  file:
-      src: "{{jdk_destination}}/{{jdk_azul_jdk_8_link_destination}}"
-      dest: "{{jdk_global_legacy_jdk_directory}}"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      state: link

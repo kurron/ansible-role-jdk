@@ -2,10 +2,6 @@
 jdk_download_directory: Downloads
 jdk_software_directory: Software
 jdk_destination: /usr/lib/jvm
-jdk_neutral_jdk_link_destination: jdk-8
-jdk_neutral_legacy_jdk_link_destination: jdk-8
-jdk_global_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_jdk_link_destination}}"
-jdk_global_legacy_jdk_directory: "{{jdk_destination}}/{{jdk_neutral_legacy_jdk_link_destination}}"
 
 jdk_azul_jdk_9_install: true
 jdk_azul_jdk_9_build: 9.0.4.1

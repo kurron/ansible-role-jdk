@@ -1,7 +1,7 @@
-# sets the global environment to point to the Oracle JDK
+# sets the global environment to point to the Azul JDK
 
-export JDK_HOME={{jdk_global_jdk_directory}}
-export JAVA_HOME={{jdk_global_jdk_directory}}
-export JAVA_CMD={{jdk_global_jdk_directory}}/bin/java
+export JDK_HOME={{jdk_destination}}/{{jdk_azul_jdk_8_link_destination}}
+export JAVA_HOME={{jdk_destination}}/{{jdk_azul_jdk_8_link_destination}}
+export JAVA_CMD={{jdk_destination}}/{{jdk_azul_jdk_8_link_destination}}/bin/java
 
-PATH=$PATH:{{jdk_global_jdk_directory}}/bin
+PATH=$PATH:{{jdk_destination}}/{{jdk_azul_jdk_8_link_destination}}/bin
