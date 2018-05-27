@@ -1,5 +1,5 @@
 ---
-- name: Create privledged folders
+- name: Create privileged folders
   become: yes
   file:
       path: "{{item}}"
