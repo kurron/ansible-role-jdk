@@ -3,8 +3,12 @@ jdk_download_directory: Downloads
 jdk_software_directory: Software
 jdk_destination: /usr/lib/jvm
 
-jdk_azul_jdk_10_install: true
-jdk_azul_jdk_10_build: 10.1+11 
+jdk_azul_jdk_11_install: true
+jdk_azul_jdk_11_build: 11.1+23-ea
+jdk_azul_jdk_11_link_destination: azul-jdk-11
+
+jdk_azul_jdk_10_install: false
+jdk_azul_jdk_10_build: 10.1+11
 jdk_azul_jdk_10_link_destination: azul-jdk-10
 
 jdk_azul_jdk_9_install: false
@@ -13,6 +17,6 @@ jdk_azul_jdk_9_version: 9.0.4
 jdk_azul_jdk_9_link_destination: azul-jdk-9
 
 jdk_azul_jdk_8_install: true
-jdk_azul_jdk_8_build: 8.28.0.1
-jdk_azul_jdk_8_version: 8.0.163
+jdk_azul_jdk_8_build: 8.31.0.1
+jdk_azul_jdk_8_version: 8.0.181
 jdk_azul_jdk_8_link_destination: azul-jdk-8
