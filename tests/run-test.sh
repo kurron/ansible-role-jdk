@@ -17,8 +17,8 @@ xhost +
 
 CMD="docker run --env DISPLAY=unix${DISPLAY} \
                 --env HOME=${HOME_DIR} \
-                --env JDK_HOME=/usr/lib/jvm/azul-jdk-8 \
-                --env JAVA_HOME=/usr/lib/jvm/azul-jdk-8 \
+                --env JDK_HOME=/usr/lib/jvm/azul-jdk-11 \
+                --env JAVA_HOME=/usr/lib/jvm/azul-jdk-11 \
                 --net host \
                 --interactive \
                 --tty \
