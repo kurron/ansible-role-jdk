@@ -8,6 +8,6 @@ jdk_azul_jdk_11_build: 11.2.3
 jdk_azul_jdk_11_link_destination: azul-jdk-11
 
 jdk_azul_jdk_8_install: true
-jdk_azul_jdk_8_build: 8.31.0.1
-jdk_azul_jdk_8_version: 8.0.181
+jdk_azul_jdk_8_build: 8.33.0.1
+jdk_azul_jdk_8_version: 8.0.192
 jdk_azul_jdk_8_link_destination: azul-jdk-8
