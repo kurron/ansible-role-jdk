@@ -18,6 +18,10 @@ Role Variables
 * jdk_azul_jdk_11_install: true
 * jdk_azul_jdk_11_build: 11.1+23-ea
 * jdk_azul_jdk_11_link_destination: azul-jdk-11
+* jdk_amazon_jdk_8_install: true
+* jdk_amazon_jdk_8_build: 8.202.08.2
+* jdk_amazon_jdk_8_version: 8.0.192
+* jdk_amazon_jdk_8_link_destination: amazon-jdk-8
 
 
 Dependencies
