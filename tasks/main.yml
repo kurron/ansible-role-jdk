@@ -12,8 +12,7 @@
 - name: Download Amazon JDK 8 Tarball
   become: no
   get_url:
-            
-      url: "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-{{jdk_amazon_jdk_8_build}}-linux-x64.tar.gz"
+      url: "https://d3pxv6yz143wms.cloudfront.net/{{jdk_amazon_jdk_8_build}}/amazon-corretto-{{jdk_amazon_jdk_8_build}}-linux-x64.tar.gz"
       dest: "{{ansible_user_dir}}/{{jdk_download_directory}}/amazon-jdk-{{jdk_amazon_jdk_8_build}}.tar.gz"
       mode: 0444
   when: jdk_amazon_jdk_8_install
